@@ -26,8 +26,8 @@ int main() {
         cout << "NISN ditemukan di index ke-" << ditemukan << endl;
     else
         cout << "NISN tidak ditemukan" << endl;
+    system("pause");
 
     return 0;
 
-    system("pause");
 }
