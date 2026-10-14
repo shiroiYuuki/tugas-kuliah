@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <title>AlgoRhythm — Kuasai Pemrograman Web dari Nol</title>
+  <style>
+    /* ===== Variabel warna dan dasar tipografi ===== */
+    :root {
+      --bayangan: 0 12px 24px rgba(45, 30, 18, 0.12);
+      --warna-primer: #c2410c;
+      --warna-primer-gelap: #9a3412;
+      --aksen-lembut: #fff7ed;
+      --teks: #292524;
+      --teks-redup: #57534e;
+      --latar: #ffffff;
+      --latar-lembut: #fafaf9;
+      --garis: #e7e5e4;
+      --radius: 10px;
+    }
+
+    body {
+      margin: 0;
+
+      font-family: "Segoe UI", system-ui, -apple-system, sans- serif;
+
+      font-size: 16px;
+      line-height: 1.65;
+      color: var(--teks);
+      background-color: var(--latar);
+    }
+
+    /* ===== Hierarki judul ===== */
+    h1 {
+      font-size: 2.4rem;
+      line-height: 1.2;
+      color: var(--teks);
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      color: var(--teks);
+    }
+
+    h3 {
+      font-size: 1.15rem;
+      color: var(--teks);
+    }
+
+    main>section {
+      padding: 1.5rem 1rem;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    main>section>p {
+      color: var(--teks-redup);
+    }
+
+    /* ===== Kepala & navigasi ===== */
+    .header-situs {
+      background-color: var(--latar);
+      border-bottom: 1px solid var(--garis);
+      padding: 0.75rem 1rem;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: var(--teks);
+      text-decoration: none;
+    }
+
+    .logo img {
+      display: block;
+    }
+
+    .daftar-nav {
+      list-style: none;
+      margin: 0.5rem 0 0;
+      padding: 0;
+    }
+
+    .daftar-nav li {
+      margin: 0.25rem 0;
+    }
+
+    .daftar-nav a {
+      color: var(--teks-redup);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .daftar-nav a:hover {
+      color: var(--warna-primer);
+    }
+
+    /* Submenu Paket — menjorok di dalam menu mobile */
+    .submenu {
+      list-style: none;
+      margin: 0;
+      padding: 0 0 0.4rem 1.25rem;
+    }
+
+    .submenu a {
+      font-size: 0.92rem;
+      font-weight: 500;
+    }
+
+    /* ===== Tautan & tombol ===== */
+    a {
+      color: var(--warna-primer);
+    }
+
+    a:hover {
+      color: var(--warna-primer-gelap);
+    }
+
+    .tombol {
+      display: inline-block;
+      padding: 0.7rem 1.4rem;
+      border-radius: 999px;
+      border: 1px solid var(--warna-primer);
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .tombol-primer {
+      background-color: var(--warna-primer);
+      color: #fff;
+    }
+
+    .tombol-primer:hover {
+      background-color: var(--warna-primer- gelap);
+      color: #fff;
+    }
+
+    .tombol-bayangan {
+      background-color: var(--aksen-lembut);
+      color: var(--warna-primer);
+      border-color: transparent;
+    }
+
+    .tombol-bayangan:hover {
+      color: var(--warna-primer-gelap);
+    }
+
+    /* ===== Hero ===== */
+    .hero {
+      background-color: var(--aksen-lembut);
+      max-width: none;
+    }
+
+    .hero>* {
+      max-width: 960px;
+      margin-left: auto;
+      margin-right:
+        auto;
+    }
+
+    .hero p.lead {
+      font-size: 1.15rem;
+      color: var(--teks-redup);
+    }
+
+    .hero img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .statistik {
+      list-style: none;
+      padding: 0;
+      margin: 1.5rem 0 0;
+    }
+
+    .statistik li {
+      margin-bottom: 0.5rem;
+      color: var(--teks- redup);
+    }
+
+    .statistik strong {
+      color: var(--warna-primer);
+      font-size: 1.4rem;
+      margin-right: 0.35rem;
+    }
+
+    /* ===== Daftar fitur ===== */
+    .daftar-fitur {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .daftar-fitur h3 {
+      margin-bottom: 0.25rem;
+    }
+
+    .daftar-fitur p {
+      margin-top: 0;
+      color: var(--teks-redup);
+    }
+
+    /* ===== Tabel harga ===== */
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      border: none;
+      background-color: var(--latar);
+    }
+
+    caption {
+      text-align: left;
+      font-weight: 600;
+      color: var(--teks-redup);
+      margin-bottom: 0.5rem;
+    }
+
+    th,
+    td {
+      border: 1px solid var(--garis);
+      padding: 0.75rem 1rem;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    thead th {
+      background-color: var(--warna-primer);
+      color: #fff;
+      border-color: var(--warna-primer);
+    }
+
+    tbody tr:nth-child(even) {
+      background-color: var(--latar- lembut);
+    }
+
+    /* ===== Testimoni ===== */
+    blockquote {
+      margin: 0 0 1.25rem;
+      padding: 1rem 1.25rem;
+      background-color: var(--latar-lembut);
+      border-left: 4px solid var(--warna-primer);
+      border-radius: 0 var(--radius) var(--radius) 0;
+    }
+
+    blockquote p {
+      margin: 0 0 0.5rem;
+      font-style: italic;
+    }
+
+    blockquote footer {
+      color: var(--teks-redup);
+      font-size:
+        0.9rem;
+    }
+
+    /* ===== FAQ ===== */
+    .faq-item {
+      border-bottom: 1px solid var(--garis);
+      padding:
+        0.75rem 0;
+    }
+
+    .faq-item h3 {
+      margin: 0 0 0.25rem;
+    }
+
+    .faq-item p {
+      margin: 0;
+      color: var(--teks-redup);
+    }
+
+    /* ===== Formulir ===== */
+    .formulir {
+      background-color: var(--latar-lembut);
+      max-width:
+        none;
+    }
+
+    .formulir>* {
+      max-width: 640px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    form fieldset {
+      border: 1px solid var(--garis);
+      border-radius: var(--radius);
+      background-color: var(--latar);
+      margin-bottom: 1.25rem;
+      padding: 1.25rem;
+    }
+
+    form legend {
+      font-weight: 700;
+      padding: 0 0.5rem;
+      color: var(--warna-primer);
+    }
+
+    form label {
+      font-weight: 600;
+    }
+
+    form label+input,
+    form label+select,
+    form label+textarea {
+      margin-top: 0.35rem;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    select,
+    textarea {
+      display: block;
+      width: 100%;
+      padding: 0.6rem 0.75rem;
+      margin-bottom: 1rem;
+      border: 1px solid var(--garis);
+      border-radius: 8px;
+      font: inherit;
+      color: var(--teks);
+      background-color: var(--latar);
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: 2px solid var(--warna-primer);
+      outline-offset: 1px;
+      border-color: var(--warna-primer);
+    }
+
+    input[type="radio"],
+    input[type="checkbox"] {
+      margin-right:
+        0.4rem;
+    }
+
+    .grup-radio label,
+    .label-cek {
+      font-weight: 400;
+    }
+
+    .grup-radio {
+      margin-bottom: 0.5rem;
+    }
+
+    button.tombol {
+      font: inherit;
+    }
+
+    .form-aksi {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    /* ===== Kaki ===== */
+    .footer-situs {
+      background-color: #1c1917;
+      color: #d6d3d1;
+      padding: 2rem 1rem;
+    }
+
+    .footer-situs>* {
+      max-width: 960px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .footer-situs h3 {
+      color: #fff;
+      font-size: 1rem;
+    }
+
+    .footer-situs ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 1rem;
+    }
+
+    .footer-situs a {
+      color: #d6d3d1;
+      text-decoration: none;
+    }
+
+    .footer-situs a:hover {
+      color: #fdba74;
+    }
+
+    .footer-situs .hak-cipta {
+      color: #a8a29e;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===== KEPALA & NAVIGASI ===== -->
+  <header class="header-situs">
+    <a class="logo" href="#beranda">
+      <img src="assets/logo.svg" alt="Logo AlgoRhythm" width="40" height="40">
+      <span>AlgoRhythm</span>
+    </a>
+    <nav class="nav-utama">
+      <ul class="daftar-nav">
+        <li><a href="#beranda">Beranda</a></li>
+        <li><a href="#fitur">Fitur</a></li>
+        <li class="punya-submenu">
+          <a href="#harga" class="tautan-submenu" aria-haspopup="true" aria-expanded="false">Paket <span class="caret"
+              aria-hidden="true">&#9662;</span></a>
+          <ul class="submenu">
+            <li><a href="#harga">Kelas Pemula</a></li>
+            <li><a href="#harga">Kelas Pro</a></li>
+            <li><a href="#harga">Kelas Tim</a></li>
+          </ul>
+        </li>
+        <li><a href="#testimoni">Testimoni</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#daftar">Daftar</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ===== HERO ===== -->
+    <section id="beranda" class="hero">
+      <h1>Kuasai Pemrograman Web, dari Nol sampai Siap Kerja</h1>
+      <p class="lead">AlgoRhythm adalah platform belajar pemrograman web berbahasa
+        Indonesia dengan kurikulum terstruktur, mentor praktisi, dan proyek
+        nyata untuk portofolio Anda.</p>
+      <p>
+        <a class="tombol tombol-primer" href="#daftar">Mulai Belajar</a>
+        <a class="tombol tombol-bayangan" href="#fitur">Lihat Fitur</a>
+      </p>
+      <img src="assets/hero.svg" alt="Ilustrasi tampilan dashboard kursus AlgoRhythm" width="640" height="420">
+      <ul class="statistik">
+        <li><strong>12.500+</strong> alumni</li>
+        <li><strong>4,9/5</strong> rating peserta</li>
+        <li><strong>120+</strong> video materi</li>
+      </ul>
+    </section>
+
+    <!-- ===== FITUR ===== -->
+    <section id="fitur">
+      <h2>Kenapa Belajar di AlgoRhythm?</h2>
+      <ul class="daftar-fitur">
+        <li>
+          <h3>Kurikulum Terstruktur</h3>
+          <p>Materi disusun bertahap dari HTML, CSS, hingga JavaScript — cocok untuk pemula tanpa latar IT.</p>
+        </li>
+        <li>
+          <h3>Mentor Praktisi</h3>
+          <p>Dibimbing langsung oleh developer yang aktif bekerja di industri teknologi.</p>
+        </li>
+        <li>
+          <h3>Proyek Portofolio</h3>
+          <p>Setiap modul ditutup dengan proyek nyata yang bisa dipamerkan ke calon perusahaan.</p>
+        </li>
+        <li>
+          <h3>Sertifikat Kelulusan</h3>
+          <p>Dapatkan sertifikat terverifikasi setelah menyelesaikan seluruh modul dan ujian akhir.</p>
+        </li>
+        <li>
+          <h3>Komunitas Aktif</h3>
+          <p>Bergabung dengan 8.000+ member untuk diskusi, code review, dan info lowongan kerja.</p>
+        </li>
+        <li>
+          <h3>Akses Selamanya</h3>
+          <p>Sekali bayar, akses seluruh materi dan pembaruan kurikulum selamanya.</p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ===== HARGA ===== -->
+    <section id="harga">
+      <h2>Pilih Paket Belajarmu</h2>
+      <table>
+        <caption>Perbandingan paket belajar AlgoRhythm</caption>
+        <thead>
+          <tr>
+            <th>Paket</th>
+            <th>Harga</th>
+            <th>Fasilitas</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Pemula</td>
+            <td>Gratis</td>
+            <td>Modul HTML dasar, akses komunitas</td>
+          </tr>
+          <tr>
+            <td>Pro</td>
+            <td>Rp299.000</td>
+            <td>Semua modul, proyek portofolio, sertifikat, code review mentor</td>
+          </tr>
+          <tr>
+            <td>Kelas Tim</td>
+            <td>Rp999.000</td>
+            <td>Semua fasilitas Pro untuk 5 orang, sesi mentoring privat</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ===== TESTIMONI ===== -->
+    <section id="testimoni">
+      <h2>Apa Kata Alumni?</h2>
+      <blockquote>
+        <p>"Materinya runtut banget. Saya yang awalnya nggak tahu apa-apa soal
+          coding, sekarang sudah bisa bikin website sendiri."</p>
+        <footer>— Dewi Lestari, Mahasiswa</footer>
+      </blockquote>
+      <blockquote>
+        <p>"Proyek portofolio dari AlgoRhythm jadi andalan saya saat interview.
+          Alhamdulillah langsung diterima kerja."</p>
+        <footer>— Rizky Pratama, Fresh Graduate</footer>
+      </blockquote>
+      <blockquote>
+        <p>"Sebagai freelancer, sertifikat dan komunitasnya sangat membantu
+          saya mendapat klien pertama."</p>
+        <footer>— Sari Wulandari, Freelancer</footer>
+      </blockquote>
+    </section>
+
+    <!-- ===== FAQ ===== -->
+    <section id="faq">
+      <h2>Pertanyaan yang Sering Diajukan</h2>
+      <article class="faq-item">
+        <h3>Apakah cocok untuk pemula tanpa latar IT?</h3>
+        <p>Sangat cocok. Kurikulum dimulai dari konsep paling dasar dan setiap
+          materi disertai latihan berlangkah.</p>
+      </article>
+      <article class="faq-item">
+        <h3>Bagaimana format belajarnya?</h3>
+        <p>Belajar mandiri lewat video dan modul interaktif, ditambah sesi
+          tanya jawab mingguan bersama mentor.</p>
+      </article>
+      <article class="faq-item">
+        <h3>Apakah ada garansi?</h3>
+        <p>Ada. Paket Pro dan Kelas Tim dilindungi garansi uang kembali 14 hari
+          tanpa syarat.</p>
+      </article>
+    </section>
+
+    <!-- ===== FORMULIR PENDAFTARAN ===== -->
+    <section id="daftar" class="formulir">
+      <h2>Daftar Sekarang</h2>
+      <p>Isi formulir di bawah ini dan mulai perjalanan belajarmu hari ini.</p>
+
+      <form action="#" method="post">
+        <fieldset>
+          <legend>Data Diri</legend>
+
+          <label for="nama">Nama Lengkap</label>
+          <input type="text" id="nama" name="nama" required minlength="3" placeholder="cth: Budi Santoso">
+
+          <label for="email">Alamat Email</label>
+          <input type="email" id="email" name="email" required placeholder="cth: budi@email.com">
+
+          <label for="whatsapp">Nomor WhatsApp</label>
+          <input type="tel" id="whatsapp" name="whatsapp" required pattern="[0-9]{10,13}"
+            placeholder="cth: 081234567890">
+        </fieldset>
+
+        <fieldset>
+          <legend>Pilihan Belajar</legend>
+
+          <label for="paket">Paket Belajar</label>
+          <select id="paket" name="paket" required>
+            <option value="">— Pilih paket —</option>
+            <optgroup label="Gratis">
+              <option value="pemula">Pemula — Gratis</option>
+            </optgroup>
+            <optgroup label="Berbayar">
+              <option value="pro">Pro — Rp299.000</option>
+              <option value="tim">Kelas Tim — Rp999.000</option>
+            </optgroup>
+          </select>
+
+          <p>Jadwal belajar yang diinginkan:</p>
+          <div class="grup-radio">
+            <input type="radio" id="jadwal-pagi" name="jadwal" value="pagi" required>
+            <label for="jadwal-pagi">Pagi (08.00–10.00)</label>
+          </div>
+          <div class="grup-radio">
+            <input type="radio" id="jadwal-malam" name="jadwal" value="malam">
+            <label for="jadwal-malam">Malam (19.00–21.00)</label>
+          </div>
+          <div class="grup-radio">
+            <input type="radio" id="jadwal-weekend" name="jadwal" value="weekend">
+            <label for="jadwal-weekend">Akhir pekan (Sabtu–Minggu)</label>
+          </div>
+
+          <label for="motivasi">Motivasi belajar (opsional)</label>
+          <textarea id="motivasi" name="motivasi" rows="4" maxlength="300"
+            placeholder="Ceritakan singkat kenapa kamu ingin belajar pemrograman web..."></textarea>
+        </fieldset>
+
+        <div class="grup-radio">
+          <input type="checkbox" id="setuju" name="setuju" value="ya" required>
+          <label for="setuju" class="label-cek">Saya menyetujui
+            <a href="#">Syarat &amp; Ketentuan</a> dan
+            <a href="#">Kebijakan Privasi</a> AlgoRhythm.</label>
+        </div>
+
+        <div class="form-aksi">
+          <button type="submit" class="tombol tombol-primer">Daftar Sekarang</button>
+          <button type="reset" class="tombol tombol-bayangan">Kosongkan</button>
+        </div>
+      </form>
+    </section>
+
+  </main>
+
+  <!-- ===== KAKI ===== -->
+  <footer class="footer-situs">
+    <section>
+      <h3>Produk</h3>
+      <ul>
+        <li><a href="#fitur">Fitur</a></li>
+        <li><a href="#harga">Harga</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </section>
+    <section>
+      <h3>Bantuan</h3>
+      <ul>
+        <li><a href="#">Kontak</a></li>
+        <li><a href="#">Kebijakan Privasi</a></li>
+        <li><a href="#">Syarat &amp; Ketentuan</a></li>
+      </ul>
+    </section>
+    <section>
+      <h3>Tentang</h3>
+      <ul>
+        <li><a href="#">Cerita Kami</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Karier</a></li>
+      </ul>
+    </section>
+    <p class="hak-cipta">&copy; 2026 AlgoRhythm. Seluruh hak cipta dilindungi.</p>
+  </footer>
+
+</body>
+
+</html>
