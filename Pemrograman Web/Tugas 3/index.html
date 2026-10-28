@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Kodingin — Kuasai Pemrograman Web dari Nol</title>
+  <style>
+    /* ============================================================
+       MOBILE-FIRST: gaya dasar untuk layar kecil (< 720px)
+       ============================================================ */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    :root {
+      --warna-primer: #c2410c;
+      --warna-primer-gelap: #9a3412;
+      --aksen-lembut: #fff7ed;
+      --teks: #292524;
+      --teks-redup: #57534e;
+      --latar: #ffffff;
+      --latar-lembut: #fafaf9;
+      --garis: #e7e5e4;
+      --radius: 12px;
+      --bayangan: 0 4px 14px rgba(28, 25, 23, 0.08);
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+      color: var(--teks);
+      background-color: var(--latar);
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    h1 {
+      font-size: 2rem;
+      line-height: 1.15;
+      margin: 0 0 1rem;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      margin: 0 0 0.5rem;
+    }
+
+    h3 {
+      font-size: 1.1rem;
+      margin: 0 0 0.4rem;
+    }
+
+    .wadah {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 0 1.25rem;
+    }
+
+    main>section {
+      padding: 3rem 0;
+    }
+
+    .lead {
+      font-size: 1.1rem;
+      color: var(--teks-redup);
+      margin: 0 0 1.5rem;
+    }
+
+    .subjudul-bagian {
+      color: var(--teks-redup);
+      margin: 0 0 2rem;
+    }
+
+    /* ===== Kepala ===== */
+    .header-situs {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background-color: rgba(255, 255, 255, 0.95);
+      border-bottom: 1px solid var(--garis);
+    }
+
+    .header-isi {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 0.75rem;
+      padding-bottom: 0.75rem;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: var(--teks);
+      text-decoration: none;
+    }
+
+    /* Tombol hamburger — hanya tampil di layar kecil */
+    .nav-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.55rem 1rem;
+      background: none;
+      border: 1px solid var(--garis);
+      border-radius: 999px;
+      cursor: pointer;
+      font: inherit;
+      font-weight: 600;
+      color: var(--teks);
+    }
+
+    .nav-bars {
+      display: inline-flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .nav-bars span {
+      display: block;
+      width: 18px;
+      height: 2px;
+      background-color: currentColor;
+      border-radius: 2px;
+    }
+
+    /* Nav mobile: tersembunyi sampai dibuka (JS pada Tugas 9) */
+    .daftar-nav {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      gap: 0;
+      list-style: none;
+      margin: 0;
+      padding: 0.5rem 1.25rem 1rem;
+      background-color: var(--latar);
+      border-bottom: 1px solid var(--garis);
+    }
+
+    .nav-utama.terbuka .daftar-nav {
+      display: flex;
+    }
+
+    .daftar-nav a {
+      display: block;
+      padding: 0.6rem 0;
+      color: var(--teks-redup);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .daftar-nav a:hover {
+      color: var(--warna-primer);
+    }
+
+    .daftar-nav .tombol {
+      text-align: center;
+      margin-top: 0.5rem;
+      padding: 0.6rem 1.4rem;
+    }
+
+    /* Submenu Paket — menjorok di dalam menu mobile */
+    .submenu {
+      list-style: none;
+      margin: 0;
+      padding: 0 0 0.4rem 1.25rem;
+    }
+
+    .submenu a {
+      font-size: 0.92rem;
+      font-weight: 500;
+    }
+
+    /* ===== Tombol ===== */
+    .tombol {
+      display: inline-block;
+      padding: 0.7rem 1.5rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .tombol-primer {
+      background-color: var(--warna-primer);
+      color: #ffffff;
+    }
+
+    .tombol-primer:hover {
+      background-color: var(--warna-primer-gelap);
+      color: #ffffff;
+    }
+
+    .tombol-bayangan {
+      background-color: var(--aksen-lembut);
+      color: var(--warna-primer);
+    }
+
+    .tombol-bayangan:hover {
+      color: var(--warna-primer-gelap);
+    }
+
+    a {
+      color: var(--warna-primer);
+    }
+
+    a:hover {
+      color: var(--warna-primer-gelap);
+    }
+
+    /* ===== Hero: tumpuk di mobile ===== */
+    .hero {
+      background-color: var(--aksen-lembut);
+    }
+
+    .hero-isi {
+      display: grid;
+      gap: 2rem;
+    }
+
+    .hero-media img {
+      display: block;
+      width: 100%;
+    }
+
+    .hero-aksi {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+    }
+
+    .statistik {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .statistik li {
+      color: var(--teks-redup);
+      font-size: 0.85rem;
+    }
+
+    .statistik strong {
+      display: block;
+      color: var(--warna-primer);
+      font-size: 1.3rem;
+    }
+
+    /* ===== Grid kartu: 1 kolom di mobile ===== */
+    .daftar-fitur,
+    .daftar-harga,
+    .daftar-testimoni {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .kartu {
+      padding: 1.5rem;
+      background-color: var(--latar);
+      border: 1px solid var(--garis);
+      border-radius: var(--radius);
+    }
+
+    .kartu:hover {
+      box-shadow: var(--bayangan);
+    }
+
+    .kartu p {
+      margin: 0;
+      color: var(--teks-redup);
+    }
+
+    .kartu-harga {
+      position: relative;
+      padding: 1.75rem;
+      background-color: var(--latar);
+      border: 1px solid var(--garis);
+      border-radius: var(--radius);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .kartu-harga.unggulan {
+      border-color: var(--warna-primer);
+      border-width: 2px;
+      box-shadow: var(--bayangan);
+    }
+
+    .lencana {
+      position: absolute;
+      top: -14px;
+      right: 1.25rem;
+      background-color: var(--warna-primer);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.3rem 0.9rem;
+      border-radius: 999px;
+    }
+
+    .harga-angka {
+      font-size: 2rem;
+      font-weight: 800;
+      margin: 0.5rem 0 1rem;
+    }
+
+    .harga-angka small {
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: var(--teks-redup);
+    }
+
+    .kartu-harga ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 1.5rem;
+      color: var(--teks-redup);
+      flex: 1;
+    }
+
+    .kartu-harga li {
+      padding: 0.3rem 0;
+    }
+
+    .kartu-harga li::before {
+      content: "✓ ";
+      color: var(--warna-primer);
+      font-weight: 700;
+    }
+
+    .kartu-testimoni {
+      margin: 0;
+      padding: 1.5rem;
+      background-color: var(--latar-lembut);
+      border-left: 4px solid var(--warna-primer);
+      border-radius: 0 var(--radius) var(--radius) 0;
+    }
+
+    .kartu-testimoni p {
+      margin: 0 0 0.75rem;
+      font-style: italic;
+    }
+
+    .kartu-testimoni footer {
+      color: var(--teks-redup);
+      font-size: 0.9rem;
+    }
+
+    /* ===== FAQ ===== */
+    .faq-item {
+      border-bottom: 1px solid var(--garis);
+      padding: 1rem 0;
+    }
+
+    .faq-item h3 {
+      margin: 0 0 0.35rem;
+    }
+
+    .faq-item p {
+      margin: 0;
+      color: var(--teks-redup);
+    }
+
+    /* ===== Formulir ===== */
+    .formulir {
+      background-color: var(--latar-lembut);
+    }
+
+    .formulir .wadah {
+      max-width: 640px;
+    }
+
+    form fieldset {
+      border: 1px solid var(--garis);
+      border-radius: var(--radius);
+      background-color: var(--latar);
+      margin-bottom: 1.25rem;
+      padding: 1.25rem;
+    }
+
+    form legend {
+      font-weight: 700;
+      padding: 0 0.5rem;
+      color: var(--warna-primer);
+    }
+
+    form label {
+      font-weight: 600;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    select,
+    textarea {
+      display: block;
+      width: 100%;
+      padding: 0.6rem 0.75rem;
+      margin: 0.35rem 0 1rem;
+      border: 1px solid var(--garis);
+      border-radius: 8px;
+      font: inherit;
+      color: var(--teks);
+      background-color: var(--latar);
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: 2px solid var(--warna-primer);
+      outline-offset: 1px;
+      border-color: var(--warna-primer);
+    }
+
+    input[type="radio"],
+    input[type="checkbox"] {
+      margin-right: 0.4rem;
+    }
+
+    .grup-radio {
+      margin-bottom: 0.5rem;
+    }
+
+    .grup-radio label {
+      font-weight: 400;
+    }
+
+    .form-aksi {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    button.tombol {
+      font: inherit;
+    }
+
+    /* ===== Kaki ===== */
+    .footer-situs {
+      background-color: #1c1917;
+      color: #d6d3d1;
+      padding: 3rem 0 2rem;
+    }
+
+    .footer-kolom {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-situs h3 {
+      color: #fff;
+      font-size: 1rem;
+    }
+
+    .footer-situs ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-situs li {
+      padding: 0.2rem 0;
+    }
+
+    .footer-situs a {
+      color: #d6d3d1;
+      text-decoration: none;
+    }
+
+    .footer-situs a:hover {
+      color: #fdba74;
+    }
+
+    .hak-cipta {
+      color: #a8a29e;
+      font-size: 0.9rem;
+      margin: 0;
+    }
+
+    /* ============================================================
+       TABLET (≥ 720px): dua kolom untuk kartu
+       ============================================================ */
+    @media (min-width: 720px) {
+      h1 {
+        font-size: 2.4rem;
+      }
+
+      h2 {
+        font-size: 1.8rem;
+      }
+
+      main>section {
+        padding: 4rem 0;
+      }
+
+      .daftar-fitur,
+      .daftar-testimoni {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer-kolom {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .statistik li {
+        font-size: 0.95rem;
+      }
+
+      .statistik strong {
+        font-size: 1.6rem;
+      }
+    }
+
+    /* ============================================================
+       DESKTOP (≥ 960px): nav horizontal, hero dua kolom, 3 kolom kartu
+       ============================================================ */
+    @media (min-width: 960px) {
+      h1 {
+        font-size: 2.8rem;
+      }
+
+      .nav-toggle {
+        display: none;
+      }
+
+      .daftar-nav {
+        position: static;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 1.5rem;
+        padding: 0;
+        border: none;
+        background: none;
+      }
+
+      .daftar-nav .tombol {
+        margin-top: 0;
+      }
+
+      .punya-submenu {
+        position: relative;
+      }
+
+      .submenu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: 20;
+        min-width: 190px;
+        padding: 0.5rem;
+        background-color: var(--latar);
+        border: 1px solid var(--garis);
+        border-radius: var(--radius);
+        box-shadow: var(--bayangan);
+      }
+
+      .punya-submenu:hover .submenu,
+      .punya-submenu:focus-within .submenu,
+      .punya-submenu.terbuka .submenu {
+        display: block;
+      }
+
+      .submenu a {
+        display: block;
+        padding: 0.5rem 0.75rem;
+        border-radius: 8px;
+      }
+
+      .submenu a:hover {
+        background-color: var(--aksen-lembut);
+      }
+
+      .hero-isi {
+        grid-template-columns: 1.15fr 1fr;
+        align-items: center;
+        gap: 3rem;
+      }
+
+      .daftar-fitur {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .daftar-harga {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .daftar-testimoni {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .tombol.tombol-primer.tombol-daftar {
+      color: #ffffff;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===== KEPALA & NAVIGASI ===== -->
+  <header class="header-situs">
+    <div class="wadah header-isi">
+      <a class="logo" href="#beranda">
+        <img src="assets/logo.svg" alt="Logo Kodingin" width="40" height="40">
+        <span>Kodingin</span>
+      </a>
+      <button class="nav-toggle" aria-label="Buka menu navigasi" aria-expanded="false">
+        <span class="nav-bars" aria-hidden="true"><span></span><span></span><span></span></span>
+        Menu
+      </button>
+      <nav class="nav-utama">
+        <ul class="daftar-nav">
+          <li><a href="#beranda">Beranda</a></li>
+          <li><a href="#fitur">Fitur</a></li>
+          <li class="punya-submenu">
+            <a href="#harga" class="tautan-submenu" aria-haspopup="true" aria-expanded="false">Paket <span class="caret"
+                aria-hidden="true">&#9662;</span></a>
+            <ul class="submenu">
+              <li><a href="#harga-pemula">Kelas Pemula</a></li>
+              <li><a href="#harga-pro">Kelas Pro</a></li>
+              <li><a href="#harga-tim">Kelas Tim</a></li>
+            </ul>
+          </li>
+          <li><a href="#testimoni">Testimoni</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a class="tombol tombol-primer tombol-daftar" href="#daftar">Daftar</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ===== HERO ===== -->
+    <section id="beranda" class="hero">
+      <div class="wadah hero-isi">
+        <div class="hero-teks">
+          <h1>Kuasai Pemrograman Web, dari Nol sampai Siap Kerja</h1>
+          <p class="lead">Kodingin adalah platform belajar pemrograman web
+            berbahasa Indonesia dengan kurikulum terstruktur, mentor praktisi,
+            dan proyek nyata untuk portofolio Anda.</p>
+          <p class="hero-aksi">
+            <a class="tombol tombol-primer" href="#daftar">Mulai Belajar</a>
+            <a class="tombol tombol-bayangan" href="#fitur">Lihat Fitur</a>
+          </p>
+          <ul class="statistik">
+            <li><strong>12.500+</strong> alumni</li>
+            <li><strong>4,9/5</strong> rating peserta</li>
+            <li><strong>120+</strong> video materi</li>
+          </ul>
+        </div>
+        <div class="hero-media">
+          <img src="assets/hero.svg" alt="Ilustrasi tampilan dashboard kursus Kodingin" width="640" height="420">
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FITUR ===== -->
+    <section id="fitur">
+      <div class="wadah">
+        <h2>Kenapa Belajar di Kodingin?</h2>
+        <p class="subjudul-bagian">Semua yang kamu butuhkan untuk menjadi web developer.</p>
+        <ul class="daftar-fitur">
+          <li class="kartu">
+            <h3>Kurikulum Terstruktur</h3>
+            <p>Materi disusun bertahap dari HTML, CSS, hingga JavaScript — cocok untuk pemula tanpa latar IT.</p>
+          </li>
+          <li class="kartu">
+            <h3>Mentor Praktisi</h3>
+            <p>Dibimbing langsung oleh developer yang aktif bekerja di industri teknologi.</p>
+          </li>
+          <li class="kartu">
+            <h3>Proyek Portofolio</h3>
+            <p>Setiap modul ditutup dengan proyek nyata yang bisa dipamerkan ke calon perusahaan.</p>
+          </li>
+          <li class="kartu">
+            <h3>Sertifikat Kelulusan</h3>
+            <p>Dapatkan sertifikat terverifikasi setelah menyelesaikan seluruh modul dan ujian akhir.</p>
+          </li>
+          <li class="kartu">
+            <h3>Komunitas Aktif</h3>
+            <p>Bergabung dengan 8.000+ member untuk diskusi, code review, dan info lowongan kerja.</p>
+          </li>
+          <li class="kartu">
+            <h3>Akses Selamanya</h3>
+            <p>Sekali bayar, akses seluruh materi dan pembaruan kurikulum selamanya.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== HARGA ===== -->
+    <section id="harga">
+      <div class="wadah">
+        <h2>Pilih Paket Belajarmu</h2>
+        <p class="subjudul-bagian">Harga transparan, tanpa biaya tersembunyi.</p>
+        <div class="daftar-harga">
+          <article class="kartu-harga" id="harga-pemula">
+            <h3>Pemula</h3>
+            <p class="harga-angka">Gratis</p>
+            <ul>
+              <li>Modul HTML dasar</li>
+              <li>Akses komunitas</li>
+            </ul>
+            <a class="tombol tombol-bayangan" href="#daftar">Pilih Pemula</a>
+          </article>
+          <article class="kartu-harga unggulan" id="harga-pro">
+            <span class="lencana">Paling Populer</span>
+            <h3>Pro</h3>
+            <p class="harga-angka">Rp299.000 <small>/selamanya</small></p>
+            <ul>
+              <li>Semua modul &amp; pembaruan</li>
+              <li>Proyek portofolio</li>
+              <li>Sertifikat kelulusan</li>
+              <li>Code review mentor</li>
+            </ul>
+            <a class="tombol tombol-primer" href="#daftar">Pilih Pro</a>
+          </article>
+          <article class="kartu-harga" id="harga-tim">
+            <h3>Kelas Tim</h3>
+            <p class="harga-angka">Rp999.000 <small>/5 orang</small></p>
+            <ul>
+              <li>Semua fasilitas Pro</li>
+              <li>Untuk 5 anggota tim</li>
+              <li>Sesi mentoring privat</li>
+            </ul>
+            <a class="tombol tombol-bayangan" href="#daftar">Pilih Kelas Tim</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TESTIMONI ===== -->
+    <section id="testimoni">
+      <div class="wadah">
+        <h2>Apa Kata Alumni?</h2>
+        <p class="subjudul-bagian">Cerita nyata dari para lulusan Kodingin.</p>
+        <div class="daftar-testimoni">
+          <blockquote class="kartu-testimoni">
+            <p>"Materinya runtut banget. Saya yang awalnya nggak tahu apa-apa
+              soal coding, sekarang sudah bisa bikin website sendiri."</p>
+            <footer>— Dewi Lestari, Mahasiswa</footer>
+          </blockquote>
+          <blockquote class="kartu-testimoni">
+            <p>"Proyek portofolio dari Kodingin jadi andalan saya saat
+              interview. Alhamdulillah langsung diterima kerja."</p>
+            <footer>— Rizky Pratama, Fresh Graduate</footer>
+          </blockquote>
+          <blockquote class="kartu-testimoni">
+            <p>"Sebagai freelancer, sertifikat dan komunitasnya sangat membantu
+              saya mendapat klien pertama."</p>
+            <footer>— Sari Wulandari, Freelancer</footer>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FAQ ===== -->
+    <section id="faq">
+      <div class="wadah">
+        <h2>Pertanyaan yang Sering Diajukan</h2>
+        <article class="faq-item">
+          <h3>Apakah cocok untuk pemula tanpa latar IT?</h3>
+          <p>Sangat cocok. Kurikulum dimulai dari konsep paling dasar dan setiap
+            materi disertai latihan berlangkah.</p>
+        </article>
+        <article class="faq-item">
+          <h3>Bagaimana format belajarnya?</h3>
+          <p>Belajar mandiri lewat video dan modul interaktif, ditambah sesi
+            tanya jawab mingguan bersama mentor.</p>
+        </article>
+        <article class="faq-item">
+          <h3>Apakah ada garansi?</h3>
+          <p>Ada. Paket Pro dan Kelas Tim dilindungi garansi uang kembali 14
+            hari tanpa syarat.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===== FORMULIR PENDAFTARAN ===== -->
+    <section id="daftar" class="formulir">
+      <div class="wadah">
+        <h2>Daftar Sekarang</h2>
+        <p class="subjudul-bagian">Isi formulir di bawah ini dan mulai perjalanan belajarmu hari ini.</p>
+
+        <form action="#" method="post">
+          <fieldset>
+            <legend>Data Diri</legend>
+
+            <label for="nama">Nama Lengkap</label>
+            <input type="text" id="nama" name="nama" required minlength="3" placeholder="cth: Budi Santoso">
+
+            <label for="email">Alamat Email</label>
+            <input type="email" id="email" name="email" required placeholder="cth: budi@email.com">
+
+            <label for="whatsapp">Nomor WhatsApp</label>
+            <input type="tel" id="whatsapp" name="whatsapp" required pattern="[0-9]{10,13}"
+              placeholder="cth: 081234567890">
+          </fieldset>
+
+          <fieldset>
+            <legend>Pilihan Belajar</legend>
+
+            <label for="paket">Paket Belajar</label>
+            <select id="paket" name="paket" required>
+              <option value="">— Pilih paket —</option>
+              <optgroup label="Gratis">
+                <option value="pemula">Pemula — Gratis</option>
+              </optgroup>
+              <optgroup label="Berbayar">
+                <option value="pro">Pro — Rp299.000</option>
+                <option value="tim">Kelas Tim — Rp999.000</option>
+              </optgroup>
+            </select>
+
+            <p>Jadwal belajar yang diinginkan:</p>
+            <div class="grup-radio">
+              <input type="radio" id="jadwal-pagi" name="jadwal" value="pagi" required>
+              <label for="jadwal-pagi">Pagi (08.00–10.00)</label>
+            </div>
+            <div class="grup-radio">
+              <input type="radio" id="jadwal-malam" name="jadwal" value="malam">
+              <label for="jadwal-malam">Malam (19.00–21.00)</label>
+            </div>
+            <div class="grup-radio">
+              <input type="radio" id="jadwal-weekend" name="jadwal" value="weekend">
+              <label for="jadwal-weekend">Akhir pekan (Sabtu–Minggu)</label>
+            </div>
+
+            <label for="motivasi">Motivasi belajar (opsional)</label>
+            <textarea id="motivasi" name="motivasi" rows="4" maxlength="300"
+              placeholder="Ceritakan singkat kenapa kamu ingin belajar pemrograman web..."></textarea>
+          </fieldset>
+
+          <div class="grup-radio">
+            <input type="checkbox" id="setuju" name="setuju" value="ya" required>
+            <label for="setuju">Saya menyetujui
+              <a href="#">Syarat &amp; Ketentuan</a> dan
+              <a href="#">Kebijakan Privasi</a> Kodingin.</label>
+          </div>
+
+          <div class="form-aksi">
+            <button type="submit" class="tombol tombol-primer">Daftar Sekarang</button>
+            <button type="reset" class="tombol tombol-bayangan">Kosongkan</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== KAKI ===== -->
+  <footer class="footer-situs">
+    <div class="wadah">
+      <div class="footer-kolom">
+        <section>
+          <h3>Produk</h3>
+          <ul>
+            <li><a href="#fitur">Fitur</a></li>
+            <li><a href="#harga">Harga</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </section>
+        <section>
+          <h3>Bantuan</h3>
+          <ul>
+            <li><a href="#">Kontak</a></li>
+            <li><a href="#">Kebijakan Privasi</a></li>
+            <li><a href="#">Syarat &amp; Ketentuan</a></li>
+          </ul>
+        </section>
+        <section>
+          <h3>Tentang</h3>
+          <ul>
+            <li><a href="#">Cerita Kami</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Karier</a></li>
+          </ul>
+        </section>
+      </div>
+      <p class="hak-cipta">&copy; 2026 Kodingin. Seluruh hak cipta dilindungi.</p>
+    </div>
+  </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420" width="640" height="420">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff7ed"/>
+      <stop offset="1" stop-color="#ffedd5"/>
+    </linearGradient>
+    <linearGradient id="acc" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ea580c"/>
+      <stop offset="1" stop-color="#c2410c"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="420" rx="24" fill="url(#bg)"/>
+  <circle cx="560" cy="60" r="90" fill="#fed7aa" opacity="0.55"/>
+  <circle cx="70" cy="360" r="70" fill="#fdba74" opacity="0.4"/>
+  <!-- jendela peramban -->
+  <rect x="90" y="70" width="460" height="290" rx="14" fill="#ffffff" stroke="#e7e5e4" stroke-width="2"/>
+  <rect x="90" y="70" width="460" height="42" rx="14" fill="#f5f5f4"/>
+  <rect x="90" y="98" width="460" height="14" fill="#f5f5f4"/>
+  <circle cx="116" cy="91" r="6" fill="#f87171"/>
+  <circle cx="136" cy="91" r="6" fill="#fbbf24"/>
+  <circle cx="156" cy="91" r="6" fill="#34d399"/>
+  <rect x="185" y="82" width="200" height="18" rx="9" fill="#e7e5e4"/>
+  <!-- bilah navigasi -->
+  <rect x="110" y="128" width="90" height="12" rx="6" fill="url(#acc)"/>
+  <rect x="400" y="128" width="30" height="12" rx="6" fill="#d6d3d1"/>
+  <rect x="438" y="128" width="30" height="12" rx="6" fill="#d6d3d1"/>
+  <rect x="476" y="128" width="54" height="12" rx="6" fill="#c2410c"/>
+  <!-- blok konten -->
+  <rect x="110" y="160" width="200" height="16" rx="8" fill="#292524"/>
+  <rect x="110" y="184" width="160" height="10" rx="5" fill="#a8a29e"/>
+  <rect x="110" y="200" width="180" height="10" rx="5" fill="#d6d3d1"/>
+  <rect x="110" y="226" width="92" height="26" rx="13" fill="url(#acc)"/>
+  <rect x="212" y="226" width="92" height="26" rx="13" fill="#ffedd5"/>
+  <!-- kartu fitur -->
+  <rect x="330" y="160" width="90" height="80" rx="10" fill="#fff7ed" stroke="#fed7aa"/>
+  <rect x="440" y="160" width="90" height="80" rx="10" fill="#fff7ed" stroke="#fed7aa"/>
+  <circle cx="355" cy="182" r="9" fill="#ea580c"/>
+  <rect x="344" y="200" width="62" height="8" rx="4" fill="#d6d3d1"/>
+  <rect x="344" y="214" width="48" height="8" rx="4" fill="#e7e5e4"/>
+  <circle cx="465" cy="182" r="9" fill="#ea580c"/>
+  <rect x="454" y="200" width="62" height="8" rx="4" fill="#d6d3d1"/>
+  <rect x="454" y="214" width="48" height="8" rx="4" fill="#e7e5e4"/>
+  <!-- baris kode -->
+  <rect x="110" y="272" width="420" height="70" rx="10" fill="#1c1917"/>
+  <rect x="126" y="288" width="60" height="8" rx="4" fill="#fb923c"/>
+  <rect x="194" y="288" width="110" height="8" rx="4" fill="#a8a29e"/>
+  <rect x="126" y="306" width="30" height="8" rx="4" fill="#fb923c"/>
+  <rect x="164" y="306" width="150" height="8" rx="4" fill="#78716c"/>
+  <rect x="126" y="324" width="90" height="8" rx="4" fill="#fdba74"/>
+  <!-- lencana melayang -->
+  <rect x="470" y="250" width="120" height="46" rx="12" fill="#ffffff" stroke="#fed7aa" stroke-width="2"/>
+  <circle cx="492" cy="273" r="11" fill="#ea580c"/>
+  <path d="M486 273l4 4 8-8" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="510" y="262" width="62" height="8" rx="4" fill="#292524"/>
+  <rect x="510" y="276" width="46" height="7" rx="3.5" fill="#a8a29e"/>
+  <rect x="50" y="150" width="100" height="40" rx="10" fill="#ffffff" stroke="#fed7aa" stroke-width="2"/>
+  <rect x="62" y="162" width="50" height="8" rx="4" fill="#c2410c"/>
+  <rect x="62" y="175" width="70" height="7" rx="3.5" fill="#d6d3d1"/>
+</svg>
