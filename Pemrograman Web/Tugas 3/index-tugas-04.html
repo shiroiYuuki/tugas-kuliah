@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Codexa — Kuasai Pemrograman Web dari Nol</title>
+  <style>
+    /* awal Kode 4.1 */
+    .wadah {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 0 1.25rem;
+    }
+
+    main>section {
+      padding: 4rem 0;
+    }
+
+    .lead {
+      font-size: 1.15rem;
+      color: var(--teks-redup);
+      margin:
+        0 0 1.5rem;
+    }
+
+    .subjudul-bagian {
+      color: var(--teks-redup);
+      margin: 0 0 2.5rem;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    .kartu {
+      width: 300px;
+      padding: 20px;
+      border: 5px solid #7b00ff;
+      margin: 10px;
+      background-color: #fff7ed;
+    }
+
+    /* Akhir Kode 4.1 */
+    /* Awal Kode 4.2 */
+    .header-situs {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background-color: #ffffff;
+      border-bottom: 1px solid #e7e5e4;
+    }
+
+    .kartu-harga {
+      position: relative;
+      margin-bottom: 1rem;
+      padding: 1.5rem;
+      background-color: #ffffff;
+      border: 1px solid #e7e5e4;
+      border-radius: 12px;
+    }
+
+    .lencana {
+      position: absolute;
+      top: -12px;
+      right: 16px;
+      background-color: #c2410c;
+      color: #ffffff;
+      padding: 4px 12px;
+      border-radius: 999px;
+    }
+
+    .submenu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      z-index: 20;
+      min-width: 190px;
+      list-style: none;
+      margin: 0;
+      padding: 0.5rem;
+      background-color: #ffffff;
+      border: 1px solid #e7e5e4;
+      border-radius: 12px;
+    }
+
+    .punya-submenu:hover .submenu,
+    .punya-submenu:focus-within .submenu {
+      display: block;
+    }
+
+    /* percobaan sejarah: tiga kolom dengan float */
+    .kartu-testimoni {
+      float: left;
+      width: 30%;
+      margin: 0 1.5% 1.25rem;
+    }
+
+    /* tambalan clear — coba hapus sementara untuk melihat masalahnya
+*/
+    #faq {
+      clear: left;
+    }
+
+    /* Akhir Kode 4.2 */
+    /* Awal Kode 4.3 */
+    .header-isi {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .daftar-nav {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .daftar-fitur {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .kartu {
+      flex: 1 1 240px;
+      margin: 0;
+      padding: 1rem;
+      background-color: #ffffff;
+      border: 1px solid #e7e5e4;
+    }
+
+    /* Akhir Kode 4.3 */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+
+    :root {
+      --warna-primer: #7C3AED;
+      --warna-primer-gelap: #5B21B6;
+      --aksen-lembut: #F5F3FF;
+
+      --teks: #292524;
+      --teks-redup: #57534E;
+
+      --latar: #FFFFFF;
+      --latar-lembut: #FAFAF9;
+      --garis: #E7E5E4;
+
+      --radius: 12px;
+      --bayangan: 0 4px 14px rgba(28, 25, 23, 0.08);
+    }
+
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+      color: var(--teks);
+      background-color: var(--latar);
+    }
+
+    h1 {
+      font-size: 2.6rem;
+      line-height: 1.15;
+      margin: 0 0 1rem;
+    }
+
+    h2 {
+      font-size: 1.9rem;
+      margin: 0 0 0.5rem;
+    }
+
+    h3 {
+      font-size: 1.1rem;
+      margin: 0 0 0.4rem;
+    }
+
+    /* ===== Kepala: flexbox + sticky ===== */
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: var(--teks);
+      text-decoration: none;
+    }
+
+    .daftar-nav a {
+      color: var(--teks-redup);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .daftar-nav a:hover {
+      color: var(--warna-primer);
+    }
+
+    .daftar-nav .tombol {
+      color: #fff;
+    }
+
+    .daftar-nav .tombol:hover {
+      color: #fff;
+    }
+
+    .submenu a {
+      display: block;
+      padding: 0.5rem 0.75rem;
+      border-radius: 8px;
+    }
+
+    .submenu a:hover {
+      background-color: var(--aksen-lembut);
+    }
+
+    /* ===== Tombol ===== */
+    .tombol {
+      display: inline-block;
+      padding: 0.7rem 1.5rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .tombol-primer {
+      background-color: var(--warna-primer);
+      color: #fff;
+    }
+
+    .tombol-primer:hover {
+      background-color: var(--warna-primer-gelap);
+      color: #fff;
+    }
+
+    .tombol-bayangan {
+      background-color: var(--aksen-lembut);
+      color: var(--warna-primer);
+    }
+
+    .tombol-bayangan:hover {
+      color: var(--warna-primer-gelap);
+    }
+
+    a {
+      color: var(--warna-primer);
+    }
+
+    a:hover {
+      color: var(--warna-primer-gelap);
+    }
+
+    /* ===== Hero: dua kolom dengan flexbox ===== */
+    .hero {
+      background-color: var(--aksen-lembut);
+    }
+
+    .hero-isi {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+    }
+
+    .hero-teks {
+      flex: 1 1 55%;
+    }
+
+    .hero-media {
+      flex: 1 1 45%;
+    }
+
+    .hero-media img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .hero-aksi {
+      display: flex;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+    }
+
+    .statistik {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .statistik li {
+      color: var(--teks-redup);
+      font-size: 0.95rem;
+    }
+
+    .statistik strong {
+      display: block;
+      color: var(--warna-primer);
+      font-size: 1.6rem;
+    }
+
+    /* ===== Kartu fitur: barisan flexbox ===== */
+    .kartu:hover {
+      box-shadow: var(--bayangan);
+    }
+
+    .kartu p {
+      margin: 0;
+      color: var(--teks-redup);
+    }
+
+    /* ===== Harga: kartu fleksibel + lencana absolut ===== */
+    .daftar-harga {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      align-items: stretch;
+    }
+
+    .kartu-harga.unggulan {
+      border-color: var(--warna-primer);
+      border-width: 2px;
+      box-shadow: var(--bayangan);
+    }
+
+    .harga-angka {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--teks);
+      margin: 0.5rem 0 1rem;
+    }
+
+    .harga-angka small {
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: var(--teks-redup);
+    }
+
+    .kartu-harga ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 1.5rem;
+      color: var(--teks-redup);
+      flex: 1;
+    }
+
+    .kartu-harga li {
+      padding: 0.3rem 0;
+    }
+
+    .kartu-harga li::before {
+      content: "✓ ";
+      color: var(--warna-primer);
+      font-weight: 700;
+    }
+
+    /* ===== Testimoni: kartu ===== */
+    .daftar-testimoni {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+    }
+
+    .kartu-testimoni p {
+      margin: 0 0 0.75rem;
+      font-style: italic;
+    }
+
+    .kartu-testimoni footer {
+      color: var(--teks-redup);
+      font-size: 0.9rem;
+    }
+
+    /* ===== FAQ ===== */
+    .faq-item {
+      border-bottom: 1px solid var(--garis);
+      padding: 1rem 0;
+    }
+
+    .faq-item h3 {
+      margin: 0 0 0.35rem;
+    }
+
+    .faq-item p {
+      margin: 0;
+      color: var(--teks-redup);
+    }
+
+    /* ===== Formulir ===== */
+    .formulir {
+      background-color: var(--latar-lembut);
+    }
+
+    .formulir .wadah {
+      max-width: 640px;
+    }
+
+    form fieldset {
+      border: 1px solid var(--garis);
+      border-radius: var(--radius);
+      background-color: var(--latar);
+      margin-bottom: 1.25rem;
+      padding: 1.25rem;
+    }
+
+    form legend {
+      font-weight: 700;
+      padding: 0 0.5rem;
+      color: var(--warna-primer);
+    }
+
+    form label {
+      font-weight: 600;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    select,
+    textarea {
+      display: block;
+      width: 100%;
+      padding: 0.6rem 0.75rem;
+      margin: 0.35rem 0 1rem;
+      border: 1px solid var(--garis);
+      border-radius: 8px;
+      font: inherit;
+      color: var(--teks);
+      background-color: var(--latar);
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: 2px solid var(--warna-primer);
+      outline-offset: 1px;
+      border-color: var(--warna-primer);
+    }
+
+    input[type="radio"],
+    input[type="checkbox"] {
+      margin-right: 0.4rem;
+    }
+
+    .grup-radio {
+      margin-bottom: 0.5rem;
+    }
+
+    .grup-radio label {
+      font-weight: 400;
+    }
+
+    .form-aksi {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    button.tombol {
+      font: inherit;
+    }
+
+    /* ===== Kaki: kolom flexbox ===== */
+    .footer-situs {
+      background-color: #1c1917;
+      color: #d6d3d1;
+      padding: 3rem 0 2rem;
+    }
+
+    .footer-kolom {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-kolom section {
+      flex: 1 1 160px;
+    }
+
+    .footer-situs h3 {
+      color: #fff;
+      font-size: 1rem;
+    }
+
+    .footer-situs ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-situs li {
+      padding: 0.2rem 0;
+    }
+
+    .footer-situs a {
+      color: #d6d3d1;
+      text-decoration: none;
+    }
+
+    .footer-situs a:hover {
+      color: #fdba74;
+    }
+
+    .hak-cipta {
+      color: #a8a29e;
+      font-size: 0.9rem;
+      margin: 0;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===== KEPALA & NAVIGASI ===== -->
+  <header class="header-situs">
+    <div class="wadah header-isi">
+      <a class="logo" href="#beranda">
+        <img src="assets/logo.svg" alt="Logo Codexa" width="40" height="40">
+        <span>Codexa</span>
+      </a>
+      <nav class="nav-utama">
+        <ul class="daftar-nav">
+          <li><a href="#beranda">Beranda</a></li>
+          <li><a href="#fitur">Fitur</a></li>
+          <li class="punya-submenu">
+            <a href="#harga" class="tautan-submenu" aria-haspopup="true" aria-expanded="false">Paket <span class="caret"
+                aria-hidden="true">&#9662;</span></a>
+            <ul class="submenu">
+              <li><a href="#harga-pemula">Kelas Pemula</a></li>
+              <li><a href="#harga-pro">Kelas Pro</a></li>
+              <li><a href="#harga-tim">Kelas Tim</a></li>
+            </ul>
+          </li>
+          <li><a href="#testimoni">Testimoni</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a class="tombol tombol-primer" href="#daftar">Daftar</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ===== HERO ===== -->
+    <section id="beranda" class="hero">
+      <div class="wadah hero-isi">
+        <div class="hero-teks">
+          <h1>Kuasai Pemrograman Web, dari Nol sampai Siap Kerja</h1>
+          <p class="lead">Codexa adalah platform belajar pemrograman web
+            berbahasa Indonesia dengan kurikulum terstruktur, mentor praktisi,
+            dan proyek nyata untuk portofolio Anda.</p>
+          <p class="hero-aksi">
+            <a class="tombol tombol-primer" href="#daftar">Mulai Belajar</a>
+            <a class="tombol tombol-bayangan" href="#fitur">Lihat Fitur</a>
+          </p>
+          <ul class="statistik">
+            <li><strong>12.500+</strong> alumni</li>
+            <li><strong>4,9/5</strong> rating peserta</li>
+            <li><strong>120+</strong> video materi</li>
+          </ul>
+        </div>
+        <div class="hero-media">
+          <img src="assets/hero.svg" alt="Ilustrasi tampilan dashboard kursus Codexa" width="640" height="420">
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FITUR ===== -->
+    <section id="fitur">
+      <div class="wadah">
+        <h2>Kenapa Belajar di Codexa?</h2>
+        <p class="subjudul-bagian">Semua yang kamu butuhkan untuk menjadi web developer.</p>
+        <ul class="daftar-fitur">
+          <li class="kartu">
+            <h3>Kurikulum Terstruktur</h3>
+            <p>Materi disusun bertahap dari HTML, CSS, hingga JavaScript — cocok untuk pemula tanpa latar IT.</p>
+          </li>
+          <li class="kartu">
+            <h3>Mentor Praktisi</h3>
+            <p>Dibimbing langsung oleh developer yang aktif bekerja di industri teknologi.</p>
+          </li>
+          <li class="kartu">
+            <h3>Proyek Portofolio</h3>
+            <p>Setiap modul ditutup dengan proyek nyata yang bisa dipamerkan ke calon perusahaan.</p>
+          </li>
+          <li class="kartu">
+            <h3>Sertifikat Kelulusan</h3>
+            <p>Dapatkan sertifikat terverifikasi setelah menyelesaikan seluruh modul dan ujian akhir.</p>
+          </li>
+          <li class="kartu">
+            <h3>Komunitas Aktif</h3>
+            <p>Bergabung dengan 8.000+ member untuk diskusi, code review, dan info lowongan kerja.</p>
+          </li>
+          <li class="kartu">
+            <h3>Akses Selamanya</h3>
+            <p>Sekali bayar, akses seluruh materi dan pembaruan kurikulum selamanya.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== HARGA ===== -->
+    <section id="harga">
+      <div class="wadah">
+        <h2>Pilih Paket Belajarmu</h2>
+        <p class="subjudul-bagian">Harga transparan, tanpa biaya tersembunyi.</p>
+        <div class="daftar-harga">
+          <article class="kartu-harga" id="harga-pemula">
+            <h3>Pemula</h3>
+            <p class="harga-angka">Gratis</p>
+            <ul>
+              <li>Modul HTML dasar</li>
+              <li>Akses komunitas</li>
+            </ul>
+            <a class="tombol tombol-bayangan" href="#daftar">Pilih Pemula</a>
+          </article>
+          <article class="kartu-harga unggulan" id="harga-pro">
+            <span class="lencana">Paling Populer</span>
+            <h3>Pro</h3>
+            <p class="harga-angka">Rp299.000 <small>/selamanya</small></p>
+            <ul>
+              <li>Semua modul &amp; pembaruan</li>
+              <li>Proyek portofolio</li>
+              <li>Sertifikat kelulusan</li>
+              <li>Code review mentor</li>
+            </ul>
+            <a class="tombol tombol-primer" href="#daftar">Pilih Pro</a>
+          </article>
+          <article class="kartu-harga" id="harga-tim">
+            <h3>Kelas Tim</h3>
+            <p class="harga-angka">Rp999.000 <small>/5 orang</small></p>
+            <ul>
+              <li>Semua fasilitas Pro</li>
+              <li>Untuk 5 anggota tim</li>
+              <li>Sesi mentoring privat</li>
+            </ul>
+            <a class="tombol tombol-bayangan" href="#daftar">Pilih Kelas Tim</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TESTIMONI ===== -->
+    <section id="testimoni">
+      <div class="wadah">
+        <h2>Apa Kata Alumni?</h2>
+        <p class="subjudul-bagian">Cerita nyata dari para lulusan Codexa.</p>
+        <div class="daftar-testimoni">
+          <blockquote class="kartu-testimoni">
+            <p>"Materinya runtut banget. Saya yang awalnya nggak tahu apa-apa
+              soal coding, sekarang sudah bisa bikin website sendiri."</p>
+            <footer>— Dewi Lestari, Mahasiswa</footer>
+          </blockquote>
+          <blockquote class="kartu-testimoni">
+            <p>"Proyek portofolio dari Codexa jadi andalan saya saat
+              interview. Alhamdulillah langsung diterima kerja."</p>
+            <footer>— Rizky Pratama, Fresh Graduate</footer>
+          </blockquote>
+          <blockquote class="kartu-testimoni">
+            <p>"Sebagai freelancer, sertifikat dan komunitasnya sangat membantu
+              saya mendapat klien pertama."</p>
+            <footer>— Sari Wulandari, Freelancer</footer>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FAQ ===== -->
+    <section id="faq">
+      <div class="wadah">
+        <h2>Pertanyaan yang Sering Diajukan</h2>
+        <article class="faq-item">
+          <h3>Apakah cocok untuk pemula tanpa latar IT?</h3>
+          <p>Sangat cocok. Kurikulum dimulai dari konsep paling dasar dan setiap
+            materi disertai latihan berlangkah.</p>
+        </article>
+        <article class="faq-item">
+          <h3>Bagaimana format belajarnya?</h3>
+          <p>Belajar mandiri lewat video dan modul interaktif, ditambah sesi
+            tanya jawab mingguan bersama mentor.</p>
+        </article>
+        <article class="faq-item">
+          <h3>Apakah ada garansi?</h3>
+          <p>Ada. Paket Pro dan Kelas Tim dilindungi garansi uang kembali 14
+            hari tanpa syarat.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===== FORMULIR PENDAFTARAN ===== -->
+    <section id="daftar" class="formulir">
+      <div class="wadah">
+        <h2>Daftar Sekarang</h2>
+        <p class="subjudul-bagian">Isi formulir di bawah ini dan mulai perjalanan belajarmu hari ini.</p>
+
+        <form action="#" method="post">
+          <fieldset>
+            <legend>Data Diri</legend>
+
+            <label for="nama">Nama Lengkap</label>
+            <input type="text" id="nama" name="nama" required minlength="3" placeholder="cth: Budi Santoso">
+
+            <label for="email">Alamat Email</label>
+            <input type="email" id="email" name="email" required placeholder="cth: budi@email.com">
+
+            <label for="whatsapp">Nomor WhatsApp</label>
+            <input type="tel" id="whatsapp" name="whatsapp" required pattern="[0-9]{10,13}"
+              placeholder="cth: 081234567890">
+          </fieldset>
+
+          <fieldset>
+            <legend>Pilihan Belajar</legend>
+
+            <label for="paket">Paket Belajar</label>
+            <select id="paket" name="paket" required>
+              <option value="">— Pilih paket —</option>
+              <optgroup label="Gratis">
+                <option value="pemula">Pemula — Gratis</option>
+              </optgroup>
+              <optgroup label="Berbayar">
+                <option value="pro">Pro — Rp299.000</option>
+                <option value="tim">Kelas Tim — Rp999.000</option>
+              </optgroup>
+            </select>
+
+            <p>Jadwal belajar yang diinginkan:</p>
+            <div class="grup-radio">
+              <input type="radio" id="jadwal-pagi" name="jadwal" value="pagi" required>
+              <label for="jadwal-pagi">Pagi (08.00–10.00)</label>
+            </div>
+            <div class="grup-radio">
+              <input type="radio" id="jadwal-malam" name="jadwal" value="malam">
+              <label for="jadwal-malam">Malam (19.00–21.00)</label>
+            </div>
+            <div class="grup-radio">
+              <input type="radio" id="jadwal-weekend" name="jadwal" value="weekend">
+              <label for="jadwal-weekend">Akhir pekan (Sabtu–Minggu)</label>
+            </div>
+
+            <label for="motivasi">Motivasi belajar (opsional)</label>
+            <textarea id="motivasi" name="motivasi" rows="4" maxlength="300"
+              placeholder="Ceritakan singkat kenapa kamu ingin belajar pemrograman web..."></textarea>
+          </fieldset>
+
+          <div class="grup-radio">
+            <input type="checkbox" id="setuju" name="setuju" value="ya" required>
+            <label for="setuju">Saya menyetujui
+              <a href="#">Syarat &amp; Ketentuan</a> dan
+              <a href="#">Kebijakan Privasi</a> Codexa.</label>
+          </div>
+
+          <div class="form-aksi">
+            <button type="submit" class="tombol tombol-primer">Daftar Sekarang</button>
+            <button type="reset" class="tombol tombol-bayangan">Kosongkan</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== KAKI ===== -->
+  <footer class="footer-situs">
+    <div class="wadah">
+      <div class="footer-kolom">
+        <section>
+          <h3>Produk</h3>
+          <ul>
+            <li><a href="#fitur">Fitur</a></li>
+            <li><a href="#harga">Harga</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </section>
+        <section>
+          <h3>Bantuan</h3>
+          <ul>
+            <li><a href="#">Kontak</a></li>
+            <li><a href="#">Kebijakan Privasi</a></li>
+            <li><a href="#">Syarat &amp; Ketentuan</a></li>
+          </ul>
+        </section>
+        <section>
+          <h3>Tentang</h3>
+          <ul>
+            <li><a href="#">Cerita Kami</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Karier</a></li>
+          </ul>
+        </section>
+      </div>
+      <p class="hak-cipta">&copy; 2026 Codexa. Seluruh hak cipta dilindungi.</p>
+    </div>
+  </footer>
+
+</body>
+
+</html>

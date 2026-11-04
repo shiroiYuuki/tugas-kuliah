@@ -3,7 +3,9 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kodingin — Kuasai Pemrograman Web dari Nol</title>
+
   <style>
     /* ============================================================
        MOBILE-FIRST: gaya dasar untuk layar kecil (< 720px)
@@ -620,6 +622,8 @@
   </style>
 </head>
 
+<!-- ===== BODY ===== -->
+
 <body>
 
   <!-- ===== KEPALA & NAVIGASI ===== -->
@@ -906,6 +910,113 @@
       <p class="hak-cipta">&copy; 2026 Kodingin. Seluruh hak cipta dilindungi.</p>
     </div>
   </footer>
+
+  <script>
+
+    const namaPlatform = "NusaLearn";
+    let jumlahPengguna = 12400;
+
+    console.log("Platform :", namaPlatform);
+    console.log("Pengguna awal :", jumlahPengguna);
+
+    jumlahPengguna = jumlahPengguna + 600;
+    console.log("Pengguna baru :", jumlahPengguna);
+
+    const namaPaket = "Pro";
+    const harga = 299000;
+    const tersedia = true;
+
+    console.log(typeof namaPaket); // string
+    console.log(typeof harga); // number
+    console.log(typeof tersedia); // boolean
+
+    const promo = `Paket ${namaPaket} NusaLearn: Rp${harga}.`;
+    console.log(promo);
+
+    // harga yang dibaca dari isian formulir selalu string!
+    const hargaTeks = "299000";
+
+    console.log(hargaTeks == 299000); // true, konversi terjadi
+    console.log(hargaTeks === 299000); // false, tipe berbeda
+    console.log(Number(hargaTeks) + 1); // 299001
+
+    const hargaPerBulan = 299000; // paket Pro
+    const lamaBulan = 12;
+    let total = 0;
+    for (let i = 0; i < lamaBulan; i++) {
+      total += hargaPerBulan;
+    }
+
+    let diskon;
+    let sudahLunas = true
+
+    if (lamaBulan >= 12 && sudahLunas == true) {
+      diskon = 0.25;
+    } else if (lamaBulan >= 6 && sudahLunas == true) {
+      diskon = 0.1;
+    } else {
+      diskon = 0;
+    }
+
+    const bayar = total - total * diskon;
+
+    console.log(`Paket Pro ${lamaBulan} bulan`);
+    console.log(`Total ${total}, diskon ${diskon * 100}%`);
+    console.log(`Yang dibayar: ${bayar}`);
+
+    /* ==========================================================
+        TUGAS 6 — Dasar-Dasar JavaScript
+        Kalkulator biaya pendaftaran NusaLearn.
+        Buka DevTools (F12) → tab Console untuk melihat hasilnya.
+        ========================================================== */
+    // --- Variabel dan tipe data ---
+
+    const namaProgram = "NusaLearn"; // string
+    const tahunBerdiri = 2026; // number
+
+    let jumlahPendaftar = Number(
+      prompt("Masukkan jumlah pendaftar saat ini:")
+    ); // nilai bisa berubah
+
+    console.log(`Selamat datang di ${namaProgram}(${tahunBerdiri}).`);
+    console.log("Tipe data namaProgram :", typeof namaProgram);
+    console.log("Tipe data jumlahPendaftar :", typeof jumlahPendaftar);
+
+    // --- Harga paket (number) ---
+    const hargaPemula = 0;
+    const hargaPro = 299000;
+    const hargaTim = 999000;
+
+    // --- Operator aritmetika & perbandingan ---
+    const jumlahAnggotaTim = 5;
+    const hargaPerOrang = hargaTim / jumlahAnggotaTim;
+    console.log(`Harga Kelas Tim per orang: Rp${hargaPerOrang}`);
+    console.log(`Apakah Pro lebih murah dari Tim? ${hargaPro <
+      hargaTim}`);
+    console.log(`Apakah Pemula gratis? ${hargaPemula === 0}`);
+
+    // --- Percabangan: diskon bertingkat ---
+    const paketDipilih = "pro";
+    const hargaNormal = paketDipilih === "pro" ? hargaPro
+      : paketDipilih === "tim" ? hargaTim
+        : hargaPemula;
+    const totalBayar = hargaNormal;
+    console.log(`Paket dipilih : ${paketDipilih}`);
+    console.log(`Total bayar : Rp${totalBayar}`);
+
+    // --- Perulangan: simulasi 10 pendaftar baru ---
+    for (let i = 1; i <= 10; i++) {
+      jumlahPendaftar++;
+      console.log(`Pendaftar baru ke-${i} berhasil masuk. Total:${jumlahPendaftar}`);
+    }
+
+    // --- Operator logika & ternary ---
+    const statusKuota = jumlahPendaftar >= 5 ? "Kuota penuh" : "Masih tersedia";
+    console.log(`Status kuota : ${statusKuota}`);
+    
+</script>
+
+  </script>
 
 </body>
 
